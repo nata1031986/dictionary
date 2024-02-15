@@ -13,6 +13,7 @@ function App() {
         Coded by Tasha
       </footer>
     </div>
+    </div>
   );
 }
 
