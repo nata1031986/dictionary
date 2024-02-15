@@ -1,4 +1,28 @@
 body {
     background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-    
+
+}
+.Dictionary {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.Dictionary input[type="search"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.Dictionary input[type="search"]::placeholder {
+  color: #888;
+}
+
+.Dictionary form {
+  display: flex;
+  flex-direction: column;
 }
