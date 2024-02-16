@@ -3,6 +3,8 @@ import axios from "axios";
 import "./Dictionary.css";
 import Results from "./Results";
 
+
+
 export default function Dictionary() {
     const [keyword, setKeyword] = useState("");
     const [results, setResults] = useState(null);
@@ -26,7 +28,7 @@ export default function Dictionary() {
 
     function handleError(error) {
         console.error("Error fetching dictionary data:", error);
-        // You can handle error display or logging here
+      
     }
 
     function handleKeywordChange(event) {
