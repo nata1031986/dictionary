@@ -10,7 +10,7 @@ function App() {
         <Dictionary />
       </main>
       <footer className="text-center">
-        Coded by Tasha
+        Coded by Tasha 🤓
       </footer>
     </div>
     </div>
