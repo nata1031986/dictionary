@@ -1,61 +1,69 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./Dictionary.css";
 import Results from "./Results";
 import Photos from "./Photos";
+import "./Dictionary.css";
 
+export default function Dictionary(props) {
+  let [keyword, setKeyword] = useState(props.defaultKeyword);
+  let [results, setResults] = useState(null);
+  let [loaded, setLoaded] = useState(false);
+  let [photos, setPhotos] = useState(null);
 
-
-export default function Dictionary() {
-    const [keyword, setKeyword] = useState("");
-    const [results, setResults] = useState(null);
-    const [photos, setPhotos] = useState(null);
-
-    function handlePexelsResponse(response) {
-        console.log(response.data);
-    }
-function handleDectionaryResponse (response) {
+  function handleDictionResponse(response) {
     setResults(response.data[0]);
-}
-    function search(event) {
-        event.preventDefault();
+  }
 
-        let apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en_US/${keyword}`;
-        let headers ={ Authorization: `Bearer ${pexelsApiKey}`};
-        axios.get(apiUrl, {headers: headers}).then(handlePexelsResponse);
-    }
+  function handlePexelsResponse(response) {
+    setPhotos(response.data.photos);
+  }
 
-            let pexelsApiKey = 
-            "843fed47f3a58c43ftc397aabb8d5oc0";
-            let pexelApiUrl = 
-            `https://api.shecodes.io/images/v1/search?query=${keyword}&per_page=6`;
-            axios.get(pexelsApiUrl).then(handlePexelsResponse);
-    }
+  function search() {
+    // documentation: https://dictionaryapi.dev/e
+    let apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en_US/${keyword}`;
+    axios.get(apiUrl).then(handleDictionResponse);
 
-    function handleResponse(response) {
-        if (response?.data) {
-            setResults(response.data[0]);
-        } else {
-            console.error("Data not in expected format or empty", response);
-        }
-    }
+    let pexelsApiKey =
+      "563492ad6f91700001000001fdd29f0808df42bd90c33f42e128fa89";
+    let pexelsApiUrl = `https://api.pexels.com/v1/search?query=${keyword}&per_page=9`;
+    let headers = { Authorization: `${pexelsApiKey}` };
+    axios.get(pexelsApiUrl, { headers: headers }).then(handlePexelsResponse);
+  }
 
-    function handleError(error) {
-        console.error("Error fetching dictionary data:", error);
-      
-    }
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
 
-    function handleKeywordChange(event) {
-        setKeyword(event.target.value);
-    }
+  function handleKeywordChange(event) {
+    setKeyword(event.target.value);
+  }
 
+  function load() {
+    setLoaded(true);
+    search();
+  }
+
+  if (loaded) {
     return (
-        <div className="Dictionary">
-            <form onSubmit={search}>
-                <input type="search" onChange={handleKeywordChange} />
-            </form>
-            <Results results={results} />
-            <Photos photos={photos} />
-        </div>
+      <div className="Dictionary">
+        <section>
+ 
+          <form onSubmit={handleSubmit}>
+            <input
+              type="search"
+              onChange={handleKeywordChange}
+              defaultValue={props.defaultKeyword}
+            />
+          </form>
+          
+        </section>
+        <Results results={results} />
+        <Photos photos={photos} />
+      </div>
     );
+  } else {
+    load();
+    return "Loading";
+  }
 }
