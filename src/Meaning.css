@@ -1,6 +1,4 @@
-.Meaning .definition {
-    color: #430f58; 
-}
+
 
 .Meaning h3 {
     font-size: 24px;
@@ -10,4 +8,5 @@
 .Meaning .example {
     color: #70757a;
     font-style: italic;
+    margin-top: 10px;
 }
