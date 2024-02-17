@@ -6,3 +6,8 @@ footer {
     font-family: "Kanit", sans-serif;
     font-size: 18px;
 }
+
+.App {
+  max-width: 960px;
+  margin: 0 auto;
+}
