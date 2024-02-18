@@ -11,3 +11,13 @@ footer {
   max-width: 960px;
   margin: 0 auto;
 }
+.container {
+  display: flex; /* Assuming you're using flexbox for a row layout */
+  justify-content: center; /* Optional: Center the image horizontally */
+}
+
+.container img {
+  max-width: 100%; /* Limit the image width to the container width */
+  height: auto; /* Maintain aspect ratio */
+  /* You can adjust the width and height as needed */
+}
